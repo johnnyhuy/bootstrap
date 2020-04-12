@@ -1,10 +1,10 @@
 Write-Host "😎 Welcome to John's startup script!" -ForegroundColor Green
 
-if (Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe' -eq $false) {
+if ($(Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe') -eq $false) {
     Write-Host '🍫 Installing Chocolatety' -ForegroundColor Green
 
     # Install Chocolatey
-    if (Get-ExecutionPolicy -ne 'RemoteSigned') {
+    if ($(Get-ExecutionPolicy -Scope LocalMachine) -ne 'RemoteSigned') {
         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
     }
 
@@ -13,17 +13,18 @@ if (Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe' -eq $false) {
 }
 
 # Install git
-Write-Host "👩‍💻 Installing git" -ForegroundColor Green
+Write-Host "🌞 Installing git" -ForegroundColor Green
 . 'C:\ProgramData\chocolatey\bin\choco.exe' install git -y
 Write-Host 'Done 😎' -ForegroundColor Blue
 
 # Clone my repo
 $setupFolder = "$($env:HOME)/.johnnyhuy-setup"
-Write-Host "👩‍💻 Installing setup repo to $setupFolder" -ForegroundColor Green
+Write-Host "🌞 Installing setup repo to $setupFolder" -ForegroundColor Green
 if (-not (Test-Path $setupFolder)){
     . 'C:\Program Files\Git\cmd\git.exe' clone 'https://github.com/johnnyhuy/setup.git' $setupFolder
 } else {
-    Write-Host "Repo already exists" -ForegroundColor Yellow
+    Write-Host "Repo already exists, doing a Git pull 😘" -ForegroundColor Yellow
+    . 'C:\Program Files\Git\cmd\git.exe' pull
 }
 Write-Host 'Done 😎' -ForegroundColor Blue
 
