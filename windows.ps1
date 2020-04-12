@@ -38,7 +38,9 @@ if (-not (Test-Path $setupFolder)){
     . 'C:\Program Files\Git\cmd\git.exe' clone 'https://github.com/johnnyhuy/setup.git' $setupFolder
 } else {
     Write-Host "Repo already exists, doing a Git pull 😘" -ForegroundColor Yellow
-    . 'C:\Program Files\Git\cmd\git.exe' pull $setupFolder
+    cd $setupFolder
+    . 'C:\Program Files\Git\cmd\git.exe' pull
+    cd -
 }
 Write-Host 'Done 😎' -ForegroundColor Blue
 
