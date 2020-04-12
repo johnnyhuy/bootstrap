@@ -1,10 +1,22 @@
+#requires -RunAsAdministrator
+
+param (
+    [Parameter()]
+    [switch]
+    $ProfileUpdate = $false,
+
+    [Parameter()]
+    [string]
+    $Device = ''
+)
+
 Write-Host "😎 Welcome to John's startup script!" -ForegroundColor Green
 
-if ($(Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe') -eq $false) {
+# Install Chocolatey
+if ((Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe') -eq $false) {
     Write-Host '🍫 Installing Chocolatety' -ForegroundColor Green
 
-    # Install Chocolatey
-    if ($(Get-ExecutionPolicy -Scope LocalMachine) -ne 'RemoteSigned') {
+    if ((Get-ExecutionPolicy -Scope LocalMachine) -ne 'RemoteSigned') {
         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
     }
 
@@ -13,9 +25,11 @@ if ($(Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe') -eq $false) {
 }
 
 # Install git
-Write-Host "🌞 Installing git" -ForegroundColor Green
-. 'C:\ProgramData\chocolatey\bin\choco.exe' install git -y
-Write-Host 'Done 😎' -ForegroundColor Blue
+if ((Test-Path 'C:\Program Files\Git\cmd\git.exe') -eq $false) {
+    Write-Host "🌞 Installing git" -ForegroundColor Green
+    . 'C:\ProgramData\chocolatey\bin\choco.exe' install git -y
+    Write-Host 'Done 😎' -ForegroundColor Blue
+}
 
 # Clone my repo
 $setupFolder = "$($env:HOME)/.johnnyhuy-setup"
@@ -24,9 +38,9 @@ if (-not (Test-Path $setupFolder)){
     . 'C:\Program Files\Git\cmd\git.exe' clone 'https://github.com/johnnyhuy/setup.git' $setupFolder
 } else {
     Write-Host "Repo already exists, doing a Git pull 😘" -ForegroundColor Yellow
-    . 'C:\Program Files\Git\cmd\git.exe' pull
+    . 'C:\Program Files\Git\cmd\git.exe' pull $setupFolder
 }
 Write-Host 'Done 😎' -ForegroundColor Blue
 
 Write-Host 'Kicking off Windows setup script!' -ForegroundColor Green
-. "$setupFolder/windows.ps1"
+. "$setupFolder/windows.ps1" -ProfileUpdate:$ProfileUpdate -Device $Device
