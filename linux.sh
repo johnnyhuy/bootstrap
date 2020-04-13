@@ -60,5 +60,3 @@ echo -e "${green}😎 Kicking off setup script ${reset}"
 chmod 744 $setup_folder/linux.sh
 
 $setup_folder/linux.sh $1 $2
-
-echo "what"
