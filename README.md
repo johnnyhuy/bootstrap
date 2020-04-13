@@ -13,7 +13,7 @@ Run the following commands to get get started.
 Bootstrap with Linux! Tested on Debian so far.
 
 ```bash
-curl -s https://raw.githubusercontent.com/johnnyhuy/bootstrap/master/linux.ps1 | /bin/bash
+curl -s https://raw.githubusercontent.com/johnnyhuy/bootstrap/master/linux.sh | /bin/bash
 ```
 
 ### Windows
