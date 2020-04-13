@@ -10,7 +10,7 @@ param (
     $Device = ''
 )
 
-Write-Host "😎 Welcome to John's startup script!" -ForegroundColor Green
+Write-Host "😎 Welcome to John's bootstrap script!" -ForegroundColor Green
 
 # Install Chocolatey
 if ((Test-Path 'C:\ProgramData\chocolatey\bin\choco.exe') -eq $false) {
