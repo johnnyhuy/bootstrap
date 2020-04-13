@@ -59,4 +59,4 @@ echo -e "${blue}Done 😎${reset}\n"
 echo -e "${green}😎 Kicking off setup script ${reset}"
 chmod 744 $setup_folder/linux.sh
 
-echo "$setup_folder/linux.sh $1 $2"
+$setup_folder/linux.sh $1 $2
