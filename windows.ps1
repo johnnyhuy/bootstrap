@@ -39,6 +39,7 @@ if (-not (Test-Path $setupFolder)){
 } else {
     Write-Host "Repo already exists, doing a Git pull 😘" -ForegroundColor Yellow
     cd $setupFolder
+    . 'C:\Program Files\Git\cmd\git.exe' reset --hard
     . 'C:\Program Files\Git\cmd\git.exe' pull
     cd -
 }

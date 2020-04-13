@@ -6,7 +6,21 @@ green='\033[0;32m'
 yellow='\033[0;33m'
 blue='\033[0;34m'
 
-echo -e "${green}😎 Welcome to John's bootstrap script${reset}"
+while test $# -gt 0
+do
+    case "$1" in
+        -d*|--device*)
+            device=`echo $1 | sed -e 's/^[^=]*=//g'`
+            break
+        ;;
+        *)
+            echo -e "${red}$1 is not a recognized flag!${reset}"
+            exit 1
+        ;;
+    esac
+done
+
+echo -e "${green}😎 Welcome to John's bootstrap script\n${reset}"
 
 if [[ $EUID -eq 0 ]]
 then
@@ -25,7 +39,7 @@ fi
 
 echo -e "${green}Setting Git credentials to cache"
 git config --global credential.helper store
-echo -e "${blue}Done 😎${reset}"
+echo -e "${blue}Done 😎${reset}\n"
 
 # Install the setup repo
 setup_folder=/home/$USER/.johnnyhuy-setup
@@ -36,10 +50,13 @@ then
 else
     echo -e "${yellow}Repo already exists, doing a Git pull 😘${reset}"
     cd $setup_folder
+    git reset --hard
     git pull
     cd - > /dev/null
 fi
-echo -e "${blue}Done 😎${reset}"
+echo -e "${blue}Done 😎${reset}\n"
 
 echo -e "${green}😎 Kicking off setup script ${reset}"
-$setup_folder/linux.sh
+chmod 744 $setup_folder/linux.sh
+
+echo "$setup_folder/linux.sh $1 $2"
