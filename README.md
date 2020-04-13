@@ -13,7 +13,11 @@ Run the following commands to get get started.
 Bootstrap with Linux! Tested on Debian so far.
 
 ```bash
+# No device
 curl -s https://raw.githubusercontent.com/johnnyhuy/bootstrap/master/linux.sh | /bin/bash
+
+# My Carbon
+curl -s https://raw.githubusercontent.com/johnnyhuy/bootstrap/master/linux.sh | /bin/bash -s -- --device johnny-carbon
 ```
 
 ### Windows
