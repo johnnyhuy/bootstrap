@@ -2,6 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: bootstrap
+  title: Bootstrap
   description: A collection of kickstart scripts for setting up development environments
   tags:
     - shell
